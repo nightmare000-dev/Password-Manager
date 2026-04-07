@@ -112,6 +112,7 @@ class Generator:
 
                 Menu().menu_page()
         else:
+            # if the user wrote anything other than 'y' or 'n', show an error message and ask again
             print()
             cls.print(SAVE_ASK_ERROR)
             print()
