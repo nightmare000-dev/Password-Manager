@@ -9,6 +9,7 @@ from rich.console import Console
 from functions import Functions
 from options import Options
 from pages.generator import Generator
+from pages.list import ListPage
 from vocabulary import *
 
 os.system("clear")
@@ -18,7 +19,8 @@ cls = Console()  # initialization rich.console
 
 opt_obj = Options()  # for options
 func_obj = Functions()  # for functions
-pwgen_obj = Generator()
+pwgen_obj = Generator()  # for generator
+view_obj = ListPage()  # for list
 
 
 class Menu:
@@ -30,14 +32,17 @@ class Menu:
         choose_option_inv = cls.input(INVITATIONS[0])  # invitation
 
         # checks if the user entered a valid option
-        if choose_option_inv in ["1", "2", "3"]:
+        if choose_option_inv in ["1", "2", "3", "4"]:
             if choose_option_inv == "1":  # if the user entered 1, open the generator
                 func_obj.open_generator()
                 pwgen_obj.generate_password()
                 pwgen_obj.ask_user()
-            elif choose_option_inv == "2":  # if the user entered 2, open the helper
+            elif choose_option_inv == "2":  # if the user entered 2, open the list
+                func_obj.open_list()
+                view_obj.output_list()
+            elif choose_option_inv == "3":  # if the user entered 3, open the helper
                 func_obj.open_helper()
-            elif choose_option_inv == "3":  # if the user entered 3, exit the program
+            elif choose_option_inv == "4":  # if the user entered 4, exit the program
                 sys.exit()
             else:
                 cls.print(OPTION_ERROR)  # if a user wrote anything other than 1, 2 or 3
