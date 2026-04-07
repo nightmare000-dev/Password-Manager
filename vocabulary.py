@@ -26,3 +26,11 @@ OPTION_ERROR: str = "[bold red]Error! Choose 1, 2, 3 or 4 option![/]"  # if a us
 OUTPUT_PASSWORD: str = "[bold green]Generated password: [/]"
 COPIED: str = "[bold green]Copied to clipboard![/]"
 SAVE_ASK_ERROR: str = "[bold red]Error! Choose 'y' or 'n' option![/]"  # if a user wrote anything other than 'y' or 'n'
+ACTIONS: dict = {
+    "[bold cyan](g)[/bold cyan]": "[bold cyan] - Generate password[/bold cyan]",
+    "[bold cyan](e)[/bold cyan]": "[bold cyan] - Edit password[/bold cyan]",
+    "[bold cyan](d)[/bold cyan]": "[bold cyan] - Delete password[/bold cyan]",
+    "[bold cyan](q)[/bold cyan]": "[bold cyan] - Quit[/bold cyan]",
+}
+
+ACTIONS_FOR_TYPE: list = ["g", "e", "d", "q"]
