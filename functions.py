@@ -18,6 +18,11 @@ class Functions:
         print(fgl.renderText(TITLES[1]))
 
     @staticmethod
+    def open_list():  # directs to the List page and clears terminal
+        os.system("clear")
+        print(fgl.renderText(TITLES[3]))
+
+    @staticmethod
     def open_helper():  # directs to the Helper page and clears terminal
         os.system("clear")
         print(fgl.renderText(TITLES[2]))
