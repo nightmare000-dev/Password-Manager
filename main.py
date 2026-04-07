@@ -8,6 +8,7 @@ from rich.console import Console
 
 from functions import Functions
 from options import Options
+from pages.generator import Generator
 from vocabulary import *
 
 os.system("clear")
@@ -17,6 +18,7 @@ cls = Console()  # initialization rich.console
 
 opt_obj = Options()  # for options
 func_obj = Functions()  # for functions
+pwgen_obj = Generator()
 
 
 class Menu:
@@ -31,6 +33,8 @@ class Menu:
         if choose_option_inv in ["1", "2", "3"]:
             if choose_option_inv == "1":  # if the user entered 1, open the generator
                 func_obj.open_generator()
+                pwgen_obj.generate_password()
+                pwgen_obj.ask_user()
             elif choose_option_inv == "2":  # if the user entered 2, open the helper
                 func_obj.open_helper()
             elif choose_option_inv == "3":  # if the user entered 3, exit the program
