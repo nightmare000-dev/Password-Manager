@@ -5,7 +5,6 @@
 import json
 import string
 from random import *
-from re import M
 
 import pyperclip
 from rich.console import Console
@@ -112,3 +111,8 @@ class Generator:
                 from main import Menu
 
                 Menu().menu_page()
+        else:
+            print()
+            cls.print(SAVE_ASK_ERROR)
+            print()
+            self.ask_user()
