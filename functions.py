@@ -8,7 +8,7 @@ from pyfiglet import Figlet
 
 from vocabulary import *
 
-fgl = Figlet(font="slant")  # initialization Figlet
+fgl = Figlet(font="slant", justify="center")  # initialization Figlet
 
 
 class Functions:

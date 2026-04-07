@@ -11,7 +11,7 @@ from rich.console import Console
 from vocabulary import *
 
 cls = Console()
-fgl = Figlet(font="slant")
+fgl = Figlet(font="slant", justify="center")
 
 
 # reads file
