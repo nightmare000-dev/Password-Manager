@@ -16,6 +16,10 @@ fgl = Figlet(font="slant")
 
 # reads file
 def readDB():
+    # if the file doesn't exist, create it with an empty dictionary
+    if not os.path.exists("db.json"):
+        with open("db.json", "w", encoding="utf-8") as f:
+            json.dump({}, f)
 
     with open("db.json", "r", encoding="utf-8") as f:
         return json.load(f)
