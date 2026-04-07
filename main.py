@@ -40,6 +40,7 @@ class Menu:
             elif choose_option_inv == "2":  # if the user entered 2, open the list
                 func_obj.open_list()
                 view_obj.output_list()
+                view_obj.ask_action()
             elif choose_option_inv == "3":  # if the user entered 3, open the helper
                 func_obj.open_helper()
             elif choose_option_inv == "4":  # if the user entered 4, exit the program
