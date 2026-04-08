@@ -5,6 +5,7 @@
 import json
 import os
 
+import pyperclip
 from pyfiglet import Figlet
 from rich.console import Console
 
@@ -52,6 +53,7 @@ class ListPage:
             cls.print(f"[bold cyan]({i}) - {k}:[/] [yellow]{data[k]}[/]")
         self.last_value = len(self.keys_by_id)  # store the number of entries
 
+    # ask the user for an action and validate it
     def ask_action(self):
         print()
         # print the available actions
@@ -59,7 +61,7 @@ class ListPage:
             cls.print(key, value)
         # ask the user for an action and validate it
         ask_action = cls.input(
-            "\n[bold cyan]Type action ([/][bold magenta]g[/]/[bold yellow]e[/]/[bold red]d[/]/[bold blue]q[/][bold cyan]):[/] "
+            "\n[bold cyan]Type action ([/][bold magenta]g[/]/[bold yellow]e[/]/[bold green]c[/]/[bold red]d[/]/[bold blue]q[/][bold cyan]):[/] "
         )
 
         # validate the action and return it
@@ -87,21 +89,66 @@ class ListPage:
             pwgen_obj.generate_password()
             pwgen_obj.ask_user()
         elif ask_action == "e":
-            pass
+            data = readDB()
+            ask_edit = cls.input(
+                "[bold yellow]Which entry to edit? Type the number: [/]"
+            )
+
+            # if there are no entries, exit
+            if not data:
+                cls.print("[bold red]No entries to edit.[/]")
+                return self.ask_action()
+
+            # validate the user's input and get the corresponding key
+            elif int(ask_edit) not in self.keys_by_id:
+                cls.print("[bold red]Invalid index.[/]")
+                return self.ask_action()
+
+            # if the input is valid, get the key and prompt for new values
+            elif (
+                ask_edit.isdigit()
+                and ask_edit != "0"
+                and int(ask_edit) in range(1, self.last_value + 1)
+            ):
+                # get the key to edit based on the user's input
+                idx = int(ask_edit)
+                key_to_edit = self.keys_by_id.get(idx)
+                # if the key exists, prompt for new values and update the database
+                if key_to_edit is not None:
+                    new_password = cls.input("[bold yellow]Enter new password: [/]")
+                    new_name = cls.input("[bold yellow]Enter new name: [/]")
+                    # update the database with the new values
+                    data[key_to_edit] = new_password
+                    # remove the old key and add the new name
+                    data[new_name] = data.pop(key_to_edit)
+                    uploadDB(data)
+                    self.output_list()
+
         elif ask_action == "d":
             data = readDB()
             # ask the user which entry to delete
-            ask_which = cls.input(
+            ask_delete = cls.input(
                 "[bold yellow]Which entry to delete? Type the number: [/]"
             )
+
+            # if there are no entries, print a message and return
+            if not data:
+                cls.print("[bold red]No entries to delete.[/]")
+                return self.ask_action()
+
+            # if the input is not a valid index, print an error message and return
+            elif int(ask_delete) not in self.keys_by_id:
+                cls.print("[bold red]Invalid index.[/]")
+                return self.ask_action()
+
             # validate the user's input and delete the corresponding entry
-            if (
-                ask_which.isdigit()
-                and ask_which != "0"
-                and int(ask_which) in range(1, self.last_value + 1)
+            elif (
+                ask_delete.isdigit()
+                and ask_delete != "0"
+                and int(ask_delete) in range(1, self.last_value + 1)
             ):
                 # get the key to delete and remove it from the data dictionary
-                idx = int(ask_which)
+                idx = int(ask_delete)
                 key_to_delete = self.keys_by_id.get(idx)
                 # remove the key from the data dictionary and update the keys_by_id dictionary
                 if key_to_delete is None:
@@ -112,6 +159,26 @@ class ListPage:
                 os.system("clear")
                 self.output_list()  # refresh the list after deletion
                 return self.ask_action()  # ask the user for an action after deletion
+
+        # copy the password to the clipboard
+        elif ask_action == "c":
+            data = readDB()
+            ask_copy = cls.input(
+                "[bold yellow]Which password to copy to clipboard? Type the number: [/]"
+            )
+
+            # validate the user's input
+            if int(ask_copy) not in self.keys_by_id:
+                cls.print("[bold red]Invalid index.[/]")
+                return self.ask_action()
+
+            # copy the password to the clipboard
+            elif int(ask_copy) in self.keys_by_id:
+                key_to_copy = self.keys_by_id.get(int(ask_copy))
+                pyperclip.copy(data[key_to_copy])
+                cls.print(
+                    f"[bold green]Password copied to clipboard: {data[key_to_copy]}[/]"
+                )
         elif ask_action == "q":
             os.system("clear")
             from main import Menu
