@@ -35,3 +35,33 @@ ACTIONS: dict = {
 }
 
 ACTIONS_FOR_TYPE: list = ["g", "e", "c", "d", "q"]
+HELPER: str = """
+╔══════════════════════════════════════════════════════════════╗
+║                    PASSWORD MANAGER - HELP                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+1. Password Generator
+   • Generates a strong 16-character random password
+   • You can immediately save it with service name and login
+
+2. Password List
+   • Shows all your saved passwords
+   • Available actions:
+        • copy  → Copy password to clipboard
+        • edit  → Edit service, login or password
+        • delete → Delete entry
+
+3. Help
+   • Shows this help page
+
+4. Exit
+   • Closes the program
+
+Tips:
+   • Your passwords are stored in db.json
+   • Do not share or upload this file
+   • Make backups regularly
+
+For more information visit:
+https://github.com/nightmare000-dev/Password-Manager
+"""
