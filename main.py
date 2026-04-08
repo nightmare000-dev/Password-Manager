@@ -9,6 +9,7 @@ from rich.console import Console
 from functions import Functions
 from options import Options
 from pages.generator import Generator
+from pages.helperPage import Helper
 from pages.list import ListPage
 from vocabulary import *
 
@@ -21,6 +22,7 @@ opt_obj = Options()  # for options
 func_obj = Functions()  # for functions
 pwgen_obj = Generator()  # for generator
 view_obj = ListPage()  # for list
+helper_obj = Helper()  # for helper
 
 
 class Menu:
@@ -43,6 +45,7 @@ class Menu:
                 view_obj.ask_action()
             elif choose_option_inv == "3":  # if the user entered 3, open the helper
                 func_obj.open_helper()
+                helper_obj.output_help()
             elif choose_option_inv == "4":  # if the user entered 4, exit the program
                 sys.exit()
             else:
