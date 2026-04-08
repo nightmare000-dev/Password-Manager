@@ -9,6 +9,7 @@ import pyperclip
 from pyfiglet import Figlet
 from rich.console import Console
 
+from functions import clear
 from vocabulary import *
 
 cls = Console()
@@ -66,7 +67,7 @@ class ListPage:
 
         # validate the action and return it
         if ask_action not in ACTIONS_FOR_TYPE:
-            os.system("clear")
+            clear()
             from functions import Functions
 
             # show the list page again and ask for a valid action
@@ -156,7 +157,7 @@ class ListPage:
                     return self.ask_action()
                 data.pop(key_to_delete, None)
                 uploadDB(data)
-                os.system("clear")
+                clear()
                 self.output_list()  # refresh the list after deletion
                 return self.ask_action()  # ask the user for an action after deletion
 
@@ -180,7 +181,7 @@ class ListPage:
                     f"[bold green]Password copied to clipboard: {data[key_to_copy]}[/]"
                 )
         elif ask_action == "q":
-            os.system("clear")
+            clear()
             from main import Menu
 
             # show the menu page again

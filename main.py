@@ -6,14 +6,14 @@ import sys
 from pyfiglet import Figlet
 from rich.console import Console
 
-from functions import Functions
+from functions import Functions, clear
 from options import Options
 from pages.generator import Generator
 from pages.helperPage import Helper
 from pages.list import ListPage
 from vocabulary import *
 
-os.system("clear")
+clear()
 
 fgl = Figlet(font="slant", justify="center")  # initialization Figlet
 cls = Console()  # initialization rich.console
@@ -59,4 +59,4 @@ if __name__ == "__main__":
         menu_obj = Menu()
         menu_obj.menu_page()  # displays the menu page
         cls.input(ENDING)  # waits for the user to press ENTER to continue
-        os.system("clear")  # clears the console
+        clear()  # clears the console
