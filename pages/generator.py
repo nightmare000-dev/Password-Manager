@@ -10,6 +10,7 @@ from random import *
 import pyperclip
 from rich.console import Console
 
+from functions import clear
 from vocabulary import *
 
 
@@ -113,6 +114,7 @@ class Generator:
 
             # if the user does not want to generate another password, go back to the menu
             elif ask_redo.lower() == "n":
+                clear()
                 from main import Menu
 
                 Menu().menu_page()
