@@ -17,7 +17,7 @@
 
 #### 1. Clone the repository
 ```bash
-git clone https://github.com/nightmare000-dev/Password-Manager.git
+git clone --depth=1 https://github.com/nightmare000-dev/Password-Manager.git
 cd Password-Manager
 ```
 
