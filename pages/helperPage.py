@@ -2,11 +2,13 @@
 
 """The helper file is going to display to user all the rules for inputting user's expression"""
 
-# from rich.console import Console
+from rich.console import Console
 
 from vocabulary import *
+
+cls = Console()
 
 
 class Helper:
     def output_help(self):
-        print(HELPER)
+        cls.print(f"[bold cyan]{HELPER}[/]")
